@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
+</head>
+<body>
+    <div id="heading"> <H1> Expense Tracker</H1> </div>
+
+    <div id="Main_box">
+        <input id="expense_date" type="date">
+        <input id="expense_type" type="text" placeholder="Enter Expense Type">
+        <input id="expense_amount" type="number" placeholder=" Enter Spent Amount">
+    </div>
+    <div id="btn"><button id="adding_btn" type="button" value="Add" onclick="get_expense_details()"> Add </button> </div>
+
+    <div class="expense_table"> 
+        <table id="table_data"> 
+            <thead> 
+                <tr> 
+                    <th> Date </th>
+                    <th>Expense Name</th> 
+                    <th>Amount</th> 
+                    <th>Action</th> 
+                </tr> 
+            </thead> 
+            <tbody id="row">
+
+            </tbody>
+            <tbody id="expense-list">
+                <tr></tr>
+            </tbody> 
+        </table> 
+        <div class="total_amount"> 
+            <strong>Total:</strong>  
+            <span id="total_amount">0 Rs</span> 
+        </div> 
+
+
+
+        <div id="Modal">
+            <!-- Modal content -->
+            <div class="modal_content">
+              <span class="close" onclick="close_modal()">&times;</span>
+              <div><p id="text"> Split the bill</p></div>
+              <div id="calc">
+              <input id="existing_amount" type=" text" disabled>
+              <input id="Number_of_persons" type="text" placeholder="No.of persons">
+                <button id="split_button" type="button" value="Split" onclick="Calculation()">Split</button></div>
+                <div id="display_result"></div>
+               <div id="save_div"> <button id="save_button" type=" button" onclick="Save_Data(this.value)"> Save </button> </div>
+            </div>
+    
+</body>
+</html>
