@@ -155,6 +155,7 @@ tbody td {
 }
 #save_button
 {
+    display: none;
     background-color: rgb(118, 200, 118);
     border-radius: 15px;
     margin: 20px; 

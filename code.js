@@ -83,7 +83,7 @@
 
 // }
 let Data;
-
+let count=0
 window.onload =async () =>
 {
     let StoredData =await localStorage.getItem('Local_Data');
@@ -115,12 +115,16 @@ let  get_expense_details = async() =>
 let display_data = ()=>{
     let tbody = document.getElementById('row')
     tbody.innerHTML=''
+    let Total=0
     Data.forEach( (element,i) => {
+        Total+= element[2]
      tbody.append(stringtohtml(` <table><tr><td> ${element[0]} </td>
          <td> ${element[1]} </td>
          <td> ${element[2]} </td>
-         <td><button class='split_btn' onclick=split_function(${i})> Split </button> <button class='delete_btn' onclick=Delete_function(${i})> Delete </button> </td></tr></table>`))
-    });
+         <td><button id='split_btn${i}' onclick=split_function(${i})> Split </button> <button class='delete_btn' onclick=Delete_function(${i})> Delete </button> </td></tr></table>`))
+    })
+    let total_expenditure = document.getElementById("total_amount")
+    total_expenditure.innerHTML = Total
 }
 
 let split_function=(index)=>{      
@@ -132,8 +136,9 @@ let split_function=(index)=>{
     existing_amount.value = Number(Data[index][2])
 
     document.getElementById('save_button').value = index
+    document.getElementById('split_button').value = index
 
-    // let check = document.getElementById('save_button').value
+    
 }
 
 let Delete_function = (index) =>
@@ -143,31 +148,49 @@ let Delete_function = (index) =>
     display_data()
 }
 
-function Calculation()
+function Calculation(value)
 {
+
+ 
     let Entered_value = Number(document.getElementById('Number_of_persons').value)
-    console.log(Entered_value)
+    // console.log(Entered_value)
     let amount = Number(document.getElementById("existing_amount").value)
-    console.log(amount)
-    display_result.innerHTML = " Shared Amount ="+ (amount/Entered_value)
-}
+    // console.log(amount)
+    Data[value][2] = (amount/Entered_value)
 
-function Save_Data(value)
-{
-    // let val = display_result.innerHTML
-    let split = Number(document.getElementById('Number_of_persons').value)
+     Data[value][1] += ` split added with ${Entered_value} members`
+     localStorage.setItem('Local_Data',JSON.stringify(Data))
 
-    
-    // Data[value][2] = val
-    Data[value][1] += ` split added with ${split} members`
+    // localStorage.setItem('Local_Data',JSON.stringify(Data))
 
-    localStorage.setItem('Local_Data',JSON.stringify(Data))
-        let modal = document.getElementById("Modal");
-        modal.style.display = 'none'
-
+    let modal = document.getElementById("Modal");
+    modal.style.display = 'none'
     display_data()
 
+        let split = document.getElementById('split_btn'+value)
+        console.log(split)
+        split.style.display = 'none'
+    // split_btn.style.display ='none'
+
+
 }
+
+// function Save_Data(value)
+// {
+//     // let val = display_result.innerHTML
+//     let split = Number(document.getElementById('Number_of_persons').value)
+
+    
+//     // Data[value][2] = val
+//     Data[value][1] += ` split added with ${split} members`
+
+//     localStorage.setItem('Local_Data',JSON.stringify(Data))
+//         let modal = document.getElementById("Modal");
+//         modal.style.display = 'none'
+
+//     display_data()
+
+// }
 
 function close_modal()
 {

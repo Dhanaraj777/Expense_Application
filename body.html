@@ -49,9 +49,10 @@
               <div id="calc">
               <input id="existing_amount" type=" text" disabled>
               <input id="Number_of_persons" type="text" placeholder="No.of persons">
-                <button id="split_button" type="button" value="Split" onclick="Calculation()">Split</button></div>
+                <button id="split_button" type="button" onclick="Calculation(this.value)">Split & Save</button></div>
                 <div id="display_result"></div>
-               <div id="save_div"> <button id="save_button" type=" button" onclick="Save_Data(this.value)"> Save </button> </div>
+               <div id="save_div">
+                 <button id="save_button" type=" button" onclick="Save_Data(this.value)"> Save </button> </div>
             </div>
     
 </body>
